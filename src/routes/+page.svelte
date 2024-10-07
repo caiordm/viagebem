@@ -17,10 +17,13 @@
         const result = await model.generateContent(prompt);
         console.log(result.response);
         response = result.response.text()
+        let wait = false
         html = marked.parse(response);
         console.log(html)
     };
 </script>
+
+
 
 <div class="w-11/12 flex flex-col gap-1 items-center justify-center mt-4">
     <h1 class="text-fuchsia-900 text-2xl font-black">ViageBem 🧳</h1>
@@ -39,7 +42,7 @@
             bind:value={local}
             placeholder="Para qual lugar você quer ir?"
             name="local"
-            class="bg-transparent w-full text-md"
+            class="bg-transparent w-full text-md focus:outline-none border-none"
         />
         <button
             id="button"
@@ -49,10 +52,13 @@
         >
     </form>
     <!-- <Readme/> -->
-
+    <!-- {#if wait}
+       <p>Carregando</p> -->
     {#if response}
         <div class="w-full flex flex-col gap-3 p-4 pl-6 pr-6 bg-slate-100 border-2 border-slate-300 border-dashed rounded-3xl">
             {@html html}
         </div>
     {/if}
+
+    <span class="{response ? "mt-4" : "absolute bottom-0"} text-slate-400 mb-4">ViageBem é feito por <a href="github.com/caiordm" class="font-medium">caiordm</a></span>
 </div>
